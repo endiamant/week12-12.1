@@ -6,8 +6,11 @@ const Repos = (props) => {
   return (
     <div>
       <div>{JSON.stringify(props)}</div>
-      {props.repos.map((repo) => (<div className="bg-indigo-600 text-white rounded p-2 mb-2S" key={repo.id}>
-        <Link to={`/${username}/${repo.name}`}>{repo.name}</Link></div>))}
+      {props.repos.map((repo) => (
+        <div className="bg-indigo-600 text-white rounded p-2 mb-2S" key={repo.id}>
+          <Link to={`/${username}/${repo.name}`}>{repo.name}</Link>
+        </div>
+      ))}
     </div>
   )
 }

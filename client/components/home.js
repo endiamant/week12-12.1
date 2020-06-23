@@ -15,31 +15,33 @@ const Home = () => {
   const [repositoriesList, setRepos] = useState([])
 
   useEffect(() => {
-    if (typeof username !== 'undefined'){
-    axios.get(url).then((it) => {
-  setRepos(it.data.map((repo) => ({ name: repo.name, id: repo.id })))    
-    })
+    if (typeof username !== 'undefined') {
+      axios.get(url).then((it) => {
+        setRepos(it.data.map((repo) => ({ name: repo.name, id: repo.id })))
+      })
     }
   }, [url, username])
 
-  const [readme, setReadme] = useState([])
+  const [readme, setReadme] = useState('')
 
   useEffect(() => {
-    if (typeof username !== 'undefined' && typeof repository !== 'undefined'){
-    axios.get(urlReadme).then(({data}) => {    
-  setReadme(atob(data.content))    
-    })
+    if (typeof username !== 'undefined' && typeof repository !== 'undefined') {
+      axios.get(urlReadme).then(({ data }) => {
+        axios(data.download_url).then(({data: text }) => {
+          setReadme(text)
+        })
+      })
     }
   }, [urlReadme, username, repository])
 
   return (
     <div>
-      <Head title="ASS" />
+      <Head title="Hello World!!" />
       <Header />
       <Switch>
         <Route exact path="/" component={() => <Main />} />
         <Route exact path="/:username" component={() => <Repos repos={repositoriesList} />} />
-        <Route exact path="/:username/:repository" component={() => <Readme readme={readme}/>} />
+        <Route exact path="/:username/:repository" component={() => <Readme readme={readme} />} />
       </Switch>
     </div>
   )
