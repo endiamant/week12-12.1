@@ -40,7 +40,7 @@ const Home = () => {
       <Header />
       <Switch>
         <Route exact path="/" component={() => <Main />} />
-        <Route exact path="/:username" c  omponent={() => <Repos repos={repositoriesList} />} />
+        <Route exact path="/:username" component={() => <Repos repos={repositoriesList} />} />
         <Route exact path="/:username/:repository" component={() => <Readme readme={readme} />} />
       </Switch>
     </div>
